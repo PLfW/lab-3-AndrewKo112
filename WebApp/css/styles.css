@@ -1,0 +1,12 @@
+form.thin-form {
+	max-width: 50%;
+	margin-top: 3rem;
+}
+
+.thin-form h2 {
+	margin-top: 1rem;
+}
+
+form .form-control {
+	margin-bottom: 1rem;
+}
