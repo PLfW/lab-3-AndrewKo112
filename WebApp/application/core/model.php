@@ -1,6 +1,6 @@
 <?php
-class Model
-{
+
+class Model {
 	protected static $table_name = "";
 
 	const DBHOST = 'localhost';
@@ -17,18 +17,40 @@ class Model
 		return $connection;
 	}
 
-	public static function find ($id) {
+	public static function executeQuery ($query) {
 		$connection = Model::connect();
-		$sql = "SELECT * FROM ".static::$table_name." WHERE id=".$id." LIMIT 1";
-		$result = pg_query($connection, $sql);
+		$result = pg_query($connection, $query);
 		$result_arr = array();
 		while ($row = pg_fetch_assoc ($result)) {
 			array_push($result_arr, $row);
 		}
-		$result_arr = $result_arr[0];
 		pg_close($connection);
 		return $result_arr;
+	} 
+
+	public static function find ($id) {
+		$sql = "SELECT * FROM ".static::$table_name." WHERE id=".$id." LIMIT 1";
+		return executeQuery($sql);
 	}
 
+	public static function where ($query_str) {
+		$query = new Query(static::$table_name);
+		$query->where($query_str);
+		return $query;
+	}
+
+	public static function exists ($query_str) {
+		$query = new Query(static::$table_name);
+		$result = $query->where($query_str)->limit(1)->take();
+		return (count($result) > 0);
+	}
+
+	public static function insert (array $data) {
+		$connection = Model::connect();
+		if ($data["contact_phone"][0] != '+') {
+			$data["contact_phone"] .= '+';
+		}
+		return pg_insert($connection, static::$table_name, $data);
+	}
 }
 ?>
