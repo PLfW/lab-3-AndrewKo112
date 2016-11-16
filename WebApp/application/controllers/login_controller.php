@@ -2,11 +2,10 @@
 class Login_Controller extends Controller {
 	
 	function login() {
-		Route::redirect("/", array("dicks"=>2));
 		$this->view->generate('login.php', 'template.php');
 	}
 
-	function index() {	
+	function index() {
 		$this->login();
 	}
 	
@@ -17,7 +16,7 @@ class Login_Controller extends Controller {
 			$_SESSION["password"] = $this->params["password"];
 			Route::redirect("/");
 		} else {
-			Route::redirect("login");
+			Route::redirect("/login");
 		}
 	}
 
@@ -28,4 +27,3 @@ class Login_Controller extends Controller {
 		Route::redirect("login");
 	}
 }
-?>

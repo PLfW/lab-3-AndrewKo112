@@ -3,15 +3,16 @@
 class Model {
 	protected static $table_name = "";
 
-	const DBHOST = 'localhost';
+	const DBHOST = 'ec2-54-228-213-36.eu-west-1.compute.amazonaws.com';
 	const DBPORT = '5432';
-	const DBNAME = 'SportsInstitutions';
-	const DBUSER = 'postgres';
-	const DBPASSWORD = 'postgres';
+	const DBNAME = 'dcoqh2c16k4jpa';
+	const DBUSER = 'ukmubttubjowpc';
+	const DBPASSWORD = 'LxnVhxay4lMyTQF7GCLa7ZyCIr';
 
 	public static function connect () {
 		$connection = pg_pconnect("host=".Model::DBHOST." port=".Model::DBPORT." dbname=".Model::DBNAME." user=".Model::DBUSER." password=".Model::DBPASSWORD);
 		if (!$connection) {
+			echo "\n\nFAILED TO CONNECT\n\n";
 		    die("Connection failed: " . $conn->connect_error);
 		}
 		return $connection;
@@ -30,12 +31,22 @@ class Model {
 
 	public static function find ($id) {
 		$sql = "SELECT * FROM ".static::$table_name." WHERE id=".$id." LIMIT 1";
-		return executeQuery($sql);
+		$res = static::executeQuery($sql);
+		if (count($res) == 1) {
+			$res = $res[0];
+		}
+		return $res;
 	}
 
 	public static function where ($query_str) {
 		$query = new Query(static::$table_name);
 		$query->where($query_str);
+		return $query;
+	}
+
+	public static function order_by ($query_str) {
+		$query = new Query(static::$table_name);
+		$query->order_by($query_str);
 		return $query;
 	}
 
@@ -47,10 +58,17 @@ class Model {
 
 	public static function insert (array $data) {
 		$connection = Model::connect();
-		if ($data["contact_phone"][0] != '+') {
-			$data["contact_phone"] .= '+';
-		}
 		return pg_insert($connection, static::$table_name, $data);
+	}
+
+	public static function update (array $data, array $where) {
+		$connection = Model::connect();
+		return pg_update($connection, static::$table_name, $data, $where);
+	}
+
+	public static function delete ($id) {
+		$connection = Model::connect();
+		return pg_delete($connection, static::$table_name, array("id" => $id));
 	}
 }
 ?>

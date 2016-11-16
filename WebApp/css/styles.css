@@ -1,15 +1,16 @@
 .header {
 	display: block;
 	width: 100%;
-
 	margin-top: 0;
 	margin-bottom: 1em;
-	
-	font-size: 1.2em;
-
-	background-color: #EFEFFF;
+	font-size: 1.1em;
+	background-color: #F7F7F7;
 	border-bottom: 1px solid #BBB;
-	box-shadow: 0 0px 10px 1px rgba(0,0,0,0.75);
+	box-shadow: 0 0px 10px 1px rgba(180,180,180,180.75);
+}
+
+body {
+	padding-bottom: 25px !important;
 }
 
 .nav-top {
@@ -51,7 +52,7 @@
 	width:100%;
 	height: 100%;
 	color: inherit;
-	padding: 1.3rem;
+	padding: 1.2rem;
 	text-align: center;
 	border-bottom: 4px solid #33cc33;
 }
@@ -102,31 +103,118 @@ form .form-control {
 }
 
 .content-block {
-	border: 1px solid #BBB;
-	box-shadow: 3px 3px 5px 1px rgba(100,100,100,0.75);
+	border: 1px solid #CCC;
+	box-shadow: 2px 2px 7px 1px rgba(180,180,180,.75);
 	border-radius: .25em;
 	padding: .7em;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	width: 100%;
-	background-color: #F5F5FF;
+	background-color: #F9F9F9;
 }
 
 .dropdown-menu {
-	padding: .5em !important;
+	padding-top: .3em !important;
+	padding-bottom: .3em !important;
+	padding-left: .3em;
+	padding-right: .3em;
 	left: -80%;
 	min-width: 200px;
 }
 
 .dropdown-menu > li > a {
 	font-size: 1.6rem;
-	border-bottom: 2 solid transparent;
 }
 .dropdown-menu > li > a:hover {
-	border-bottom: 2 solid #33cc33;
+	background-color: #E1E1FF;
 }
 
 .small-text {
-	font-size: 1.6rem;
+	font-size: 1.5rem;
+}
+
+.data-block {
+	color: #555;
+	border: 1px solid #CCC;
+	background-color: #F9F9F9;
+	box-shadow: 2px 2px 7px 1px rgba(180,180,180,.75);
+	border-radius: .25em;
+	font-size: 1.2em;
+}
+
+.data-block:hover {
+	box-shadow: 3px 3px 15px 1px rgba(140,140,140,.75);
+}
+
+.btn-close {
+	background-color: transparent;
+	margin-left: 1em;
+	font-size: 1.2em;
+	text-align: center;
+	padding: 0;
+}
+
+.btn-close:hover {
+	color: rgb(240,20,50);
+}
+
+.institution {
+	padding-left: 5px;
+	padding-right: 5px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 100px;
+	margin-bottom: 1em;
+}
+
+.institution:hover {
+	text-decoration: none;
+	box-shadow: 3px 3px 15px 1px rgba(140,140,140,.75);
+	color: #333;
+}
+
+.data-row {
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+.posts-block {
+	margin-bottom: 1em;
+}
+
+.post {
+	margin-bottom: 1em;
+	padding: .3em;
+}
+
+.post-top {
+	display: block;
+	width: 100%;
+}
+
+.post-top-left {
+	display: block;
+	padding-left: 0 !important;
+}
+
+.post-top-right {
+	display: block;
+	padding-right: 1em !important;
+	text-align: right;
+}
+
+.link {
+
+}
+
+.link:hover {
+	text-decoration: blink;
+}
+
+hr {
+	margin-bottom: 7px;
+	margin-top: 7px;
+	border-top: 1px solid #ddd;
 }
 
 @media only  screen and (min-width: 992px) {
@@ -146,5 +234,12 @@ form .form-control {
 
 	.no-padding-right {
 		padding: 0 !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.modal-dialog {
+	    width: 60%;
+	    margin: 30px auto;
 	}
 }

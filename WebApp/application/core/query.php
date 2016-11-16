@@ -3,6 +3,7 @@
 class Query {
 	private $where;
 	private $limit;
+	private $offset;
 	private $order_by;
 	private $model;
 
@@ -60,6 +61,11 @@ class Query {
 		if ($this->limit > 0) {
 			$sql .= " LIMIT ".$this->limit;
 		}
+		// OFFSET statement
+		if ($this->offset > 0) {
+			$sql .= " OFFSET ".$this->offset;
+		}
+		#echo $sql;
 		// Getting the query result from db
 		$result = Model::executeQuery($sql);
 		// If user asked for just one row

@@ -2,7 +2,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>СпортРегістр</title>
-	<?php $app_name = "/WPL/"; ?>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="/css/styles.css" />
 	<script src="/js/jquery-3.1.1.min.js" type="text/javascript"></script>
@@ -20,10 +19,25 @@
 			<?php if ($_SESSION["user"]) { ?>
 				<li class="dropdown">
 					<a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+						<span class="glyphicon glyphicon-search"></span>
+					</a>
+					<form id="search-form" class="dropdown-menu content-block">
+						<div class="input-group">
+				            <input type="text" name="query" class="form-control" placeholder="Пошук..." name="q">
+				            <div class="input-group-btn">
+				                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				            </div>
+				        </div>
+					</form>
+				</li>
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
 						<?php echo $_SESSION["user"]["first_name"]?> <span class="caret"></span> 
 					</a>
 					<ul class="dropdown-menu content-block">
-						<li><a href="login/logout">Вихід</a></li>
+						<li><a href="user?id=<?php echo $_SESSION["user"]["id"] ?>">Моя сторінка</a></li>
+						<li><a href="new_institution">Новий заклад</a></li>
+						<li><a href="logout">Вихід</a></li>
 					</ul>
 				</li>
 			<?php } else { ?>
@@ -49,5 +63,20 @@
 	<footer>
 		
 	</footer>
+	<div class="modal fade" id="search-modal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title">Результати пошуку</h4>
+	      </div>
+	      <div class="modal-body row" id="search-results">
+	        
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>

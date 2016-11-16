@@ -27,21 +27,12 @@ class Route {
 	}
 
 	static function start() {
+		include "application/routes.php";
 		
 		// Default controller and action
 		$controller_name = 'Main';
 		$action_name = 'index';
 		$url = strtok($_SERVER["REQUEST_URI"],'?');
-
-		$routes = array(
-			'/' => '/main/index',
-			'/index' => '/main/index',
-			'/login' => '/login',
-			'/login_confirm' => '/login/login_confirm',
-			'/logout' => '/login/logout',
-			'/signup' => '/registration/register', 
-			'/signup_confirm' => '/registration/confirm_registration'
-		);
 		if (array_key_exists($url, $routes)) {
 			$url = $routes[$url];
 		}
@@ -61,7 +52,7 @@ class Route {
 		$controller_path = "application/controllers/".$controller_file;
 		if(file_exists($controller_path)) {
 			include $controller_path;
-			Route::include_models ();
+			Route::include_models();
 			Route::login_user();
 		} else {
 			Route::ErrorPage404();
@@ -78,8 +69,8 @@ class Route {
 	
 	}
 	
-	function ErrorPage404()	{
-		include "application/controllers/Err404_Controller.php";
+	static function ErrorPage404()	{
+		include "application/controllers/err404_Controller.php";
 		$err = "Err404_Controller";
         $errController = new $err;
         $errController->view->generate('404.php');
