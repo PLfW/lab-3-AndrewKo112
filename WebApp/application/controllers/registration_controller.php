@@ -11,13 +11,13 @@ class Registration_Controller extends Controller {
 
 	function confirm_registration () {
 		$res = null;
-		if ($this->params["id"]) {
+
+		if (array_key_exists("id", $this->params)){
 			$updated_user = User::find($this->params["id"]);
 			if (!isset($updated_user)) {
 				die();
 				return;
 			}
-			
 			if ($this->params["permissions"] && $_SESSION["user"]["permissions"] == 'admin' 
 				&& $updated_user["id"] != $_SESSION["user"]["id"]) {
 				$this->params["user"]["permissions"] = $this->params["permissions"];
@@ -29,7 +29,6 @@ class Registration_Controller extends Controller {
 				$this->params["user"]["contact_phone"] = '+'.$this->params["user"]["contact_phone"];
 			}
 			$res = User::insert($this->params["user"]);
-
 		} else {
 			echo json_encode(array('status'=>'error', 'error'=>'Користувач з такою електронною адресою вже існує'));
 		}

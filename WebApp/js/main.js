@@ -3,12 +3,12 @@ $(document).ready(function () {
 		var form = $("#signup-form");
 		var inputs = form.find('input:text, input:password');
 		var validators = {
-			password: {
+			password_signup: {
 	            regex: /^[0-9A-z_]{6,}$/,
 	        	min_length: 6,
 	        	max_length: 30
 	        },
-	        email: {
+	        email_signup: {
 	        	regex: /\S+@\S+\.\S+/,
 	        	min_length: 6,
 	        	max_length: 40
@@ -36,7 +36,7 @@ $(document).ready(function () {
 				isValid = false;
 			}
 		})
-		if ($("#password_confirm").length > 0 && $("#password").val() != $("#password_confirm").val()) {
+		if ($("#password_confirm").length > 0 && $("#password_signup").val() != $("#password_confirm").val()) {
 			$("#password_confirm").attr("data-content", "Паролі не співпадають");
 			$("#password_confirm").popover('show');
 			isValid = false;
@@ -225,7 +225,7 @@ $(document).ready(function () {
 	$('.post-rm-btn').click(function () {
 		value = $(this).val();
 		$.ajax({
-		  type: "POST",
+		  type: "DELETE",
 		  url: "/remove_post",
 		  data: {id: value},
 		  success: function(response) {
@@ -243,7 +243,7 @@ $(document).ready(function () {
 	$('.rating-rm-btn').click(function () {
 		value = $(this).val();
 		$.ajax({
-		  type: "POST",
+		  type: "DELETE",
 		  url: "/remove_rating",
 		  data: {id: value},
 		  success: function(response) {

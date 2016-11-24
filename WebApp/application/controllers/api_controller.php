@@ -1,11 +1,15 @@
 <?php
 class API_Controller extends Controller {
 	
+	function documentation () {
+		$this->view->generate('api_documentation.php', 'template.php', $this->params);
+	}
+
 	function user_data () {
 		if (array_key_exists('id', $this->params)) {
 			$user = User::find($this->params["id"]);
 		} else if (array_key_exists('email', $this->params)) {
-			$user = User::where("email='".$this->params["email"]."'").take_one();
+			$user = User::where("email='".$this->params["email"]."'")->take_one();
 		}
 		if ($user) {
 			unset($user["password"]);
@@ -23,8 +27,8 @@ class API_Controller extends Controller {
 			$name = mb_strtolower ($this->params["name"]);
 			$exploded = explode(' ', $name);
 			if (count($exploded) > 1) {
-				$query = User::where("LOWER(first_name) LIKE '%".$exploded[0]."%'");
-				$query->where("LOWER(last_name) LIKE '%".$exploded[1]."%'");
+				$query = User::where("LOWER(first_name) LIKE '%".$exploded[0]."%'")
+					->where("LOWER(last_name) LIKE '%".$exploded[1]."%'");
 			} else {
 				$query = User::where("LOWER(first_name) LIKE '%".$exploded[0]."%' OR LOWER(last_name) LIKE '%".$exploded[0]."%'");
 			}
@@ -124,6 +128,42 @@ class API_Controller extends Controller {
 			} else {
 				echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
 			}
+		} else {
+			echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
+		}
+	}
+
+	function delete_user () {
+		if (array_key_exists('id', $this->params)) {
+			$user = User::find($this->params["id"]);
+		}
+		$curr_user = $_SESSION["user"];
+		if (isset($user) && isset($curr_user) && ($curr_user["permissions"] == "admin")) {
+			$result = User::delete($this->params["id"]);
+			if ($result) {
+				echo json_encode(array('status' => 'success'), JSON_PRETTY_PRINT);
+			} else {
+				echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
+			} 
+		} else {
+			echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
+		}
+	}
+
+	function delete_institution () {
+		if (array_key_exists('id', $this->params)) {
+			$institution = Institution::find($this->params["id"]);
+		}
+		$curr_user = $_SESSION["user"];
+		if (isset($user) && isset($curr_user) && ($curr_user["permissions"] == "admin")) {
+			$result = Institution::delete($this->params["id"]);
+			if ($result) {
+				echo json_encode(array('status' => 'success'), JSON_PRETTY_PRINT);
+			} else {
+				echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
+			}
+		} else {
+			echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
 		}
 	}
 
@@ -139,6 +179,8 @@ class API_Controller extends Controller {
 			} else {
 				echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
 			}
+		} else {
+			echo json_encode(array('status' => 'fail'), JSON_PRETTY_PRINT);
 		}
 	}
 }

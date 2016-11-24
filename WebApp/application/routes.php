@@ -24,6 +24,7 @@ $routes = array(
 
 	# API
 
+	'/api' => '/api/documentation',
 	'/api/user' => '/api/user_data',
 	'/api/institution' => '/api/institution_data',
 	'/api/user/search' => '/api/find_users',
@@ -32,4 +33,5 @@ $routes = array(
 	'/api/user/update' => '/api/update_user',
 	'/api/institution/new' => '/api/new_institution',
 	'/api/user/new' => '/api/signup',
+	'/api/login' => '/api/login',
 );

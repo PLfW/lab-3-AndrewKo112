@@ -1,3 +1,36 @@
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+	width:100%;
+	position: relative;
+	margin: 0;
+	padding-bottom: 40px;
+	min-height: 100%;
+	background-color: #FFF;
+}
+
+#footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+	height: 40px;
+	text-align: right;
+	font-size: 1.1em;
+	background-color: #F7F7F7;
+	border-top: 1px solid #BBB;
+	box-shadow: 0 0px 10px 1px rgba(180,180,180,180.75);
+}
+
 .header {
 	display: block;
 	width: 100%;
@@ -7,10 +40,6 @@
 	background-color: #F7F7F7;
 	border-bottom: 1px solid #BBB;
 	box-shadow: 0 0px 10px 1px rgba(180,180,180,180.75);
-}
-
-body {
-	padding-bottom: 25px !important;
 }
 
 .nav-top {
@@ -111,6 +140,13 @@ form .form-control {
 	width: 100%;
 	background-color: #F9F9F9;
 }
+
+.bicycle {
+	width: 100%;
+	text-align: right;
+	align-items: right;
+}
+
 
 .dropdown-menu {
 	padding-top: .3em !important;

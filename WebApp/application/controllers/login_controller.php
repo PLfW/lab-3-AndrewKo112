@@ -2,7 +2,8 @@
 class Login_Controller extends Controller {
 	
 	function login() {
-		$this->view->generate('login.php', 'template.php');
+		$this->params["isLogin"] = true;
+		$this->view->generate('login.php', 'template.php', $this->params);
 	}
 
 	function index() {
@@ -14,9 +15,9 @@ class Login_Controller extends Controller {
 		if ($user) {
 			$_SESSION["email"] = $this->params["email"];
 			$_SESSION["password"] = $this->params["password"];
-			Route::redirect("/");
+			echo json_encode(array('status' => 'success', 'redirect_to' => '/'));
 		} else {
-			Route::redirect("/login");
+			echo json_encode(array('status' => 'error'));
 		}
 	}
 

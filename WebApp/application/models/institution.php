@@ -15,7 +15,7 @@ class Institution extends Model
 					<br>
 					'.$institution["city"].'
 					<br>
-				<section class="pull-right">
+				<section class="bicycle">
 						'.User::link_to($user).'</section>
 				</div>
 			</article>

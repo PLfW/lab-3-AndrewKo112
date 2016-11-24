@@ -65,8 +65,7 @@ $canEdit = $_SESSION["user"] && $_SESSION["user"]["permissions"] != "account" ||
 					if (count($rates) > 0) { ?>
 						<?php
 							foreach ($rates as $key => $rating) {
-								$canRemove = $_SESSION["user"]["permissions"] != "account" || $rating["account_id"] == $_SESSION["user"]["id"];
-								echo Rating::to_html($rating, $canRemove);
+								echo Rating::to_html($rating, $canEdit);
 							}
 						?>
 					<?php } else {

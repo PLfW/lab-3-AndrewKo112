@@ -40,16 +40,16 @@
 						<li><a href="logout">Вихід</a></li>
 					</ul>
 				</li>
-			<?php } else { ?>
+			<?php } else if (!isset($params["isLogin"])) { ?>
 				<li class="dropdown">
 					<a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
 						Увійти <span class="caret"></span> 
 					</a>
 					<div class="dropdown-menu content-block">
-						<form action="login/confirm_login" class="center-block">
+						<form id="login-form" class="center-block">
 							<h4>Вхід</h4>
-							<input type="email" name="email" placeholder="Електронна Адреса" class="form-control input">
-							<input type="password" name="password" placeholder="Пароль" class="form-control input">
+							<input type="email" id="email" name="email" placeholder="Електронна Адреса" class="form-control input">
+							<input type="password" id="password" name="password" placeholder="Пароль" class="form-control input">
 							<button type="submit" class="btn btn-primary btn-block">Надіслати</button>
 							<a href="signup" class="small-text ">Реєстрація</a>
 						</form>
@@ -60,8 +60,8 @@
 		</ul>
 	</header>
 	<?php include 'application/views/'.$content_view; ?>
-	<footer>
-		
+	<footer id="footer">
+		Автор: Андрій Колесник
 	</footer>
 	<div class="modal fade" id="search-modal">
 	  <div class="modal-dialog" role="document">
